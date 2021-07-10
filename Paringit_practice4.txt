@@ -1,0 +1,76 @@
+Practice 4
+John Thomas A. Paringit
+Grade 12 - Computer Programming A
+----------------------------------------------------------------------------------------------
+1.)
+SET SERVEROUTPUT ON
+    VARIABLE v_max_deptno NUMBER;
+    
+DECLARE
+    --Declare Variable
+    v_max_deptno NUMBER;
+    
+BEGIN 
+    /*execute comments*/
+    --initialization of variables
+    SELECT MAX(department_id)
+	INTO v_max_deptno FROM departments;
+
+    DBMS_OUTPUT.PUT_LINE('The maximmum deparment_id is:' || v_max_deptno);    
+END;
+/
+
+2.)
+SET SERVEROUTPUT ON
+    
+DECLARE
+    --Declare Variable
+    v_max_deptno NUMBER;
+    dept_name departments.department_name%TYPE:= 'Education';
+    dept_id NUMBER;
+        
+BEGIN 
+    /*execute comments*/
+    --initialization of variables
+    SELECT MAX(department_id)
+	INTO v_max_deptno FROM departments;
+    DBMS_OUTPUT.PUT_LINE('The maximmum deparment_id is: ' || v_max_deptno);     
+    dept_id := v_max_deptno + 10;
+    
+    INSERT INTO departments(department_id,department_name,location_id)
+    VALUES (dept_id, dept_name, NULL);
+    
+    DBMS_OUTPUT.PUT_LINE(' SQL%ROWCOUNT gives ' || SQL%ROWCOUNT); 
+END;
+/
+SELECT * FROM departments WHERE department_id = 280;
+
+3.)
+SET SERVEROUTPUT ON
+    
+DECLARE
+    --Declare Variable
+    dept_id NUMBER;
+        
+BEGIN 
+    /*execute comments*/
+    --initialization of variables
+    UPDATE departments SET location_id = 3000 WHERE department_id = 280;
+     
+END;
+/
+SELECT * FROM departments WHERE department_id = 280;
+/
+DELETE FROM departments WHERE department_id = 280;
+SELECT * FROM departments WHERE department_id = 280;
+
+
+
+
+
+
+
+
+
+
+
