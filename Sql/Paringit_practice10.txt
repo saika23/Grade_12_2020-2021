@@ -1,0 +1,37 @@
+John Thomas A. Paringit
+12 - Computer Programming A
+
+1.)
+SET SERVEROUTPUT ON
+cl scr
+
+CREATE OR REPLACE FUNCTION f_fullname(
+	prm_fname IN employees.first_name%type,
+	prm_lname IN employees.last_name%type
+)
+RETURN varchar
+IS
+	fullname VARCHAR(255);
+BEGIN
+	fullname := prm_name || ', ' || prm_fname;
+	REUTRN fullname;
+END f_fullname;
+
+DECLARE
+	test_fname VARCHAR2(255) := 'Jimmy';
+	test_lname VARCHAR2(255) := 'Neutron';
+BEGIN
+	DBMS_OUTPUT.PUT_LINE('--Anonymous block, testing function f_fullname--');
+	DBMS_OUTPUT.PUT_LINE(f_fullname(test_fname, test_lname));
+	DBMS_OUTPUT.PUT_LINE('------------------------------------------------');
+END;
+
+BEGIN
+	DBMS_OUTPUT.PUT_LINE('Full name: ' || f_fullname('Jeremy','Clarkson'));
+END;
+
+SELECT first_name, last_name, f_fullname(first_name, last_name) AS full_name
+FROM employees
+WHERE department_id = 50;
+
+DROP FUNCTION f_fullname;
